@@ -1,0 +1,12 @@
+com\jdm\guessthenumberrestapi\data\GuessTheNumberRoundDbDao.class
+com\jdm\guessthenumberrestapi\service\GuessTheNumberService.class
+com\jdm\guessthenumberrestapi\controller\GuessTheNumberController.class
+com\jdm\guessthenumberrestapi\TestApplicationConfiguration.class
+com\jdm\guessthenumberrestapi\App.class
+com\jdm\guessthenumberrestapi\data\GuessTheNumberRoundDbDao$RoundMapper.class
+com\jdm\guessthenumberrestapi\models\Game.class
+com\jdm\guessthenumberrestapi\data\GuessTheNumberGameDao.class
+com\jdm\guessthenumberrestapi\data\GuessTheNumberRoundDao.class
+com\jdm\guessthenumberrestapi\models\Round.class
+com\jdm\guessthenumberrestapi\data\GuessTheNumberGameDbDao.class
+com\jdm\guessthenumberrestapi\data\GuessTheNumberGameDbDao$GameMapper.class
