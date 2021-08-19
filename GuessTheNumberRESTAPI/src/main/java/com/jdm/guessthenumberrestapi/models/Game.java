@@ -1,6 +1,5 @@
 package com.jdm.guessthenumberrestapi.models;
 
-import java.time.LocalDateTime;
 
 /**
  *
@@ -8,11 +7,22 @@ import java.time.LocalDateTime;
  * @email joedmcadams@gmail.com
  * 
  */
-public class GuessTheNumber {
+public class Game {
     private int gameId;
     private boolean finished;
-    private String answer, guess, result;
-    private LocalDateTime guessTime;
+    private String answer;
+
+    public Game(int gameId, boolean finished, String answer) {
+        this.gameId = gameId;
+        this.finished = finished;
+        this.answer = answer;
+    }
+
+    public Game(String answer) {
+        this.answer = answer;
+        this.finished = false; //Default false
+    }
+   
 
     public int getGameId() {
         return gameId;
@@ -36,30 +46,6 @@ public class GuessTheNumber {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
-
-    public String getGuess() {
-        return guess;
-    }
-
-    public void setGuess(String guess) {
-        this.guess = guess;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public LocalDateTime getGuessTime() {
-        return guessTime;
-    }
-
-    public void setGuessTime(LocalDateTime guessTime) {
-        this.guessTime = guessTime;
     }
 
 }

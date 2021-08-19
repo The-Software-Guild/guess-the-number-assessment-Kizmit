@@ -29,10 +29,7 @@ public class GuessTheNumberControllerExceptionHandler extends ResponseEntityExce
     private static final String CONSTRAINT_MESSAGE = "Something went wrong.";
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public final ResponseEntity<Error> handleSqlException(
-            SQLIntegrityConstraintViolationException ex,
-            WebRequest request) {
-
+    public final ResponseEntity<Error> handleSqlException(SQLIntegrityConstraintViolationException ex, WebRequest request){
         Error err = new Error();
         err.setMessage(CONSTRAINT_MESSAGE);
         return new ResponseEntity<>(err, HttpStatus.UNPROCESSABLE_ENTITY);

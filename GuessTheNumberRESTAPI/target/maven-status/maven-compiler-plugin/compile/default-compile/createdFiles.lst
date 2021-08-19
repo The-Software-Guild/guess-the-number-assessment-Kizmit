@@ -1,8 +1,9 @@
+com\jdm\guessthenumberrestapi\data\GuessTheNumberDatabaseDao.class
+com\jdm\guessthenumberrestapi\data\GuessTheNumberDatabaseDao$RoundMapper.class
+com\jdm\guessthenumberrestapi\service\GuessTheNumberService.class
 com\jdm\guessthenumberrestapi\controller\GuessTheNumberController.class
 com\jdm\guessthenumberrestapi\controller\GuessTheNumberControllerExceptionHandler.class
 com\jdm\guessthenumberrestapi\App.class
-com\jdm\guessthenumberrestapi\data\GuessTheNumberDatabaseDao.class
+com\jdm\guessthenumberrestapi\data\GuessTheNumberDatabaseDao$GameMapper.class
 com\jdm\guessthenumberrestapi\data\GuessTheNumberDao.class
 com\jdm\guessthenumberrestapi\controller\Error.class
-com\jdm\guessthenumberrestapi\service\GuessTheNumberService.class
-com\jdm\guessthenumberrestapi\models\GuessTheNumber.class
