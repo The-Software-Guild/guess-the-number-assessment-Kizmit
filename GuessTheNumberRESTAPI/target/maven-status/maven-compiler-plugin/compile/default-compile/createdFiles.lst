@@ -1,4 +1,2 @@
 com\jdm\guessthenumberrestapi\controller\GuessTheNumberController.class
-com\jdm\guessthenumberrestapi\controller\GuessTheNumberControllerExceptionHandler.class
 com\jdm\guessthenumberrestapi\App.class
-com\jdm\guessthenumberrestapi\controller\Error.class

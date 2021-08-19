@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -67,7 +68,7 @@ public class GuessTheNumberGameDbDao implements GuessTheNumberGameDao {
     }
 
     @Override
-    public Game getGame(int gameId) {
+    public Game getGame(int gameId) throws EmptyResultDataAccessException {
         final String sql = "SELECT gameId, finished, answer FROM guessgame WHERE gameId = ?";
         return jdbcTemplate.queryForObject(sql, new GuessTheNumberGameDbDao.GameMapper(), gameId);
     }

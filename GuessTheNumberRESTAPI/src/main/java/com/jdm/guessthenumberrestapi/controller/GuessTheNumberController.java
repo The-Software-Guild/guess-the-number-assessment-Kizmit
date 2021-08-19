@@ -5,6 +5,7 @@ import com.jdm.guessthenumberrestapi.models.Round;
 import com.jdm.guessthenumberrestapi.service.GuessTheNumberService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,21 +47,41 @@ public class GuessTheNumberController {
     
     @GetMapping("/game/{gameId}")
     public ResponseEntity<Game> getGame(@PathVariable int gameId){
-        Game game = service.getGame(gameId);
-        if (game == null) {                                             
+        Game game;
+        try{
+            game = service.getGame(gameId);
+        }
+        catch(EmptyResultDataAccessException e){
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);  //Not working properly, game not null? getting status 500
         }
         return ResponseEntity.ok(game);
+       
     }
     
     @PostMapping("/guess")
-    public Round guess(@RequestBody Round round){
-        return service.guess(round.getGuess(), round.getGameId());
+    public ResponseEntity<Round> guess(@RequestBody Round round){
+        
+        try{
+            round = service.guess(round.getGuess(), round.getGameId());
+        }
+        catch(Exception e){
+            return new ResponseEntity(null, HttpStatus.METHOD_NOT_ALLOWED);
+        }
+        
+        return ResponseEntity.ok(round);
     }
     
     @GetMapping("/rounds/{gameId}")
-    public List<Round> getRounds(@PathVariable int gameId){
-        return service.getAllRounds(gameId);
+    public ResponseEntity<List<Round>> getRounds(@PathVariable int gameId){
+        List<Round> rounds;
+        try{
+            rounds = service.getAllRounds(gameId);
+        }
+        catch(EmptyResultDataAccessException e){
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        
+        return ResponseEntity.ok(rounds);
     }
     
 }

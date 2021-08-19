@@ -2,6 +2,7 @@ package com.jdm.guessthenumberrestapi.data;
 
 import com.jdm.guessthenumberrestapi.models.Game;
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 /**
  *
@@ -23,7 +24,7 @@ public interface GuessTheNumberGameDao {
      */
     public List<Game> getAllGames();
 
-    public Game getGame(int gameId);
+    public Game getGame(int gameId) throws EmptyResultDataAccessException;
 
     public void finishGame(int gameId); 
      

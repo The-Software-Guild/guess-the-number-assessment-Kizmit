@@ -65,7 +65,7 @@ public class GuessTheNumberService {
     
     //Validate input
     //Check guess accuracy and calculate result
-    public Round guess(String guess, int gameId) {
+    public Round guess(String guess, int gameId) throws Exception {
         
         String result;
         Timestamp guessTime = Timestamp.valueOf(LocalDateTime.now());
@@ -73,8 +73,8 @@ public class GuessTheNumberService {
         int p = 0;
         
         Game game = gameDao.getGame(gameId);
-        if(game == null){ 
-            return null; //throw exception?
+        if(game == null || game.isFinished()){ 
+            throw new Exception();
         }
         else{
             
