@@ -1,6 +1,5 @@
 package com.jdm.guessthenumberrestapi.service;
 
-import com.jdm.guessthenumberrestapi.data.GuessTheNumberDao;
 import com.jdm.guessthenumberrestapi.models.Game;
 import com.jdm.guessthenumberrestapi.models.Round;
 import java.sql.Timestamp;
@@ -10,6 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.jdm.guessthenumberrestapi.data.GuessTheNumberGameDao;
+import com.jdm.guessthenumberrestapi.data.GuessTheNumberRoundDao;
 
 /**
  *
@@ -21,11 +22,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class GuessTheNumberService {
     
-    private final GuessTheNumberDao dao;
+    private final GuessTheNumberGameDao gameDao;
+    private final GuessTheNumberRoundDao roundDao;
     
     @Autowired
-    public GuessTheNumberService(GuessTheNumberDao dao){
-        this.dao = dao;
+    public GuessTheNumberService(GuessTheNumberGameDao gameDao, GuessTheNumberRoundDao roundDao){
+        this.gameDao = gameDao;
+        this.roundDao = roundDao;
     }
     
     public Game createGame(){
@@ -36,19 +39,14 @@ public class GuessTheNumberService {
         }
         Collections.shuffle(numList);
         String answer = "" + numList.get(0) + numList.get(1) + numList.get(2) + numList.get(3);
-        Game game = dao.createGame(answer);
+        Game game = gameDao.createGame(answer);
         game.setAnswer("HIDDEN");
         return game;
-    }
-    
-    public void makeGuess(){
-        //Validate format of guess
-        //handle the guess
     }
 
     //Determine whether or not to hide the answer
     public List<Game> getAllGames() {
-        List<Game> games = dao.getAllGames();
+        List<Game> games = gameDao.getAllGames();
         games.stream().filter(game -> (!game.isFinished())).forEachOrdered(game -> {
             game.setAnswer("HIDDEN");
         });
@@ -58,7 +56,7 @@ public class GuessTheNumberService {
     //Determine whether or not to hide the answer
     public Game getGame(int gameId) {
         
-        Game game = dao.getGame(gameId);
+        Game game = gameDao.getGame(gameId);
         if(!game.isFinished()){
             game.setAnswer("HIDDEN");
         }
@@ -74,7 +72,7 @@ public class GuessTheNumberService {
         int e = 0;
         int p = 0;
         
-        Game game = dao.getGame(gameId);
+        Game game = gameDao.getGame(gameId);
         if(game == null){ 
             return null; //throw exception?
         }
@@ -84,8 +82,8 @@ public class GuessTheNumberService {
             
             if(answer.equals(guess)){
                 result = "e:4:p:0";
-                dao.finishGame(gameId);
-                return dao.addRound(guess, result, guessTime, gameId);
+                gameDao.finishGame(gameId);
+                return roundDao.addRound(guess, result, guessTime, gameId);
             }
             
             else{  //Check partial match
@@ -111,12 +109,12 @@ public class GuessTheNumberService {
             }
             
         }
-        return dao.addRound(guess, result, guessTime, gameId);
+        return roundDao.addRound(guess, result, guessTime, gameId);
     }
     
     //Pass-through
     public List<Round> getAllRounds(int gameId) {
-        return dao.getAllRounds(gameId);
+        return roundDao.getAllRounds(gameId);
     }
 
 }

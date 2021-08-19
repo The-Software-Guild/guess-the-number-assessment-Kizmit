@@ -63,7 +63,4 @@ public class GuessTheNumberController {
         return service.getAllRounds(gameId);
     }
     
-
-    
-
 }
