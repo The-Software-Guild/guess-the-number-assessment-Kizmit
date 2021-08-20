@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jdm.guessthenumberrestapi.data.GuessTheNumberGameDbDaoTest" time="1.92" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jdm.guessthenumberrestapi.service.GuessTheNumberServiceTest" time="0.085" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,6 +61,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testCreateGetGame" classname="com.jdm.guessthenumberrestapi.data.GuessTheNumberGameDbDaoTest" time="0.377"/>
-  <testcase name="testFinishGame" classname="com.jdm.guessthenumberrestapi.data.GuessTheNumberGameDbDaoTest" time="0.021"/>
+  <testcase name="testGuess" classname="com.jdm.guessthenumberrestapi.service.GuessTheNumberServiceTest" time="0.039"/>
+  <testcase name="testGetGame" classname="com.jdm.guessthenumberrestapi.service.GuessTheNumberServiceTest" time="0.014"/>
+  <testcase name="testCreateGame" classname="com.jdm.guessthenumberrestapi.service.GuessTheNumberServiceTest" time="0.024"/>
 </testsuite>

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.jdm.guessthenumberrestapi.data;
 
 import com.jdm.guessthenumberrestapi.models.Game;
@@ -32,11 +26,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GuessTheNumberGameDbDao implements GuessTheNumberGameDao {
     
-    private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbc;
 
     @Autowired
     public GuessTheNumberGameDbDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbc = jdbcTemplate;
     }
 
     @Override
@@ -46,7 +40,7 @@ public class GuessTheNumberGameDbDao implements GuessTheNumberGameDao {
         
         Game game = new Game(answer);
 
-        jdbcTemplate.update((Connection conn) -> {
+        jdbc.update((Connection conn) -> {
 
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -64,13 +58,13 @@ public class GuessTheNumberGameDbDao implements GuessTheNumberGameDao {
     @Override
     public List<Game> getAllGames() {
         final String sql = "SELECT gameId, finished, answer FROM guessgame";
-        return jdbcTemplate.query(sql, new GuessTheNumberGameDbDao.GameMapper());
+        return jdbc.query(sql, new GameMapper());
     }
 
     @Override
     public Game getGame(int gameId) throws EmptyResultDataAccessException {
         final String sql = "SELECT gameId, finished, answer FROM guessgame WHERE gameId = ?";
-        return jdbcTemplate.queryForObject(sql, new GuessTheNumberGameDbDao.GameMapper(), gameId);
+        return jdbc.queryForObject(sql, new GameMapper(), gameId);
     }
     
     @Override
@@ -78,9 +72,16 @@ public class GuessTheNumberGameDbDao implements GuessTheNumberGameDao {
         Game game = getGame(gameId);
         game.setFinished(true);
         final String sql = "UPDATE guessgame SET finished = ?, answer = ? WHERE gameId = ?";
-        jdbcTemplate.update(sql, game.isFinished(), game.getAnswer(), game.getGameId()); 
+        jdbc.update(sql, game.isFinished(), game.getAnswer(), game.getGameId()); 
     }
     
+    @Override
+    public void deleteGameById(int gameId){
+
+        final String DELETE_GAME = "DELETE FROM guessgame WHERE gameId = ?";
+        jdbc.update(DELETE_GAME, gameId);
+
+    }
     private static final class GameMapper implements RowMapper<Game> {
 
         @Override

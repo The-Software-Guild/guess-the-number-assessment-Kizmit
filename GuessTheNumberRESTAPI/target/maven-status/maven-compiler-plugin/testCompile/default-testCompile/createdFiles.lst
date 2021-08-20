@@ -1,2 +1,3 @@
 com\jdm\guessthenumberrestapi\data\GuessTheNumberGameDbDaoTest.class
 com\jdm\guessthenumberrestapi\data\GuessTheNumberRoundDbDaoTest.class
+com\jdm\guessthenumberrestapi\service\GuessTheNumberServiceTest.class

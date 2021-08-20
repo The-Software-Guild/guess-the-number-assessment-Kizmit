@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.jdm.guessthenumberrestapi.data;
 
 import com.jdm.guessthenumberrestapi.models.Round;
@@ -32,11 +26,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GuessTheNumberRoundDbDao implements GuessTheNumberRoundDao {
     
-    private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbc;
 
     @Autowired
     public GuessTheNumberRoundDbDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbc = jdbcTemplate;
     }
     
     @Override
@@ -46,7 +40,7 @@ public class GuessTheNumberRoundDbDao implements GuessTheNumberRoundDao {
         
         Round round = new Round(guess, result, guessTime, gameId);
 
-        jdbcTemplate.update((Connection conn) -> {
+        jdbc.update((Connection conn) -> {
 
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -65,7 +59,13 @@ public class GuessTheNumberRoundDbDao implements GuessTheNumberRoundDao {
     @Override
     public List<Round> getAllRounds(int gameId) {
         final String sql = "SELECT roundId, gameId, guess, guessTime, result FROM round WHERE gameId = ? ORDER BY guessTime ASC";
-        return jdbcTemplate.query(sql, new GuessTheNumberRoundDbDao.RoundMapper(), gameId);
+        return jdbc.query(sql, new GuessTheNumberRoundDbDao.RoundMapper(), gameId);
+    }
+
+    @Override
+    public void deleteRoundById(int roundId) {
+        final String DELETE_ROUND = "DELETE FROM round WHERE roundId = ?";
+        jdbc.update(DELETE_ROUND, roundId);
     }
     
     private static final class RoundMapper implements RowMapper<Round> {

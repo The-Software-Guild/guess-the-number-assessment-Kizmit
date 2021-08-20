@@ -52,7 +52,7 @@ public class GuessTheNumberController {
             game = service.getGame(gameId);
         }
         catch(EmptyResultDataAccessException e){
-            return new ResponseEntity(null, HttpStatus.NOT_FOUND);  //Not working properly, game not null? getting status 500
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND); 
         }
         return ResponseEntity.ok(game);
        

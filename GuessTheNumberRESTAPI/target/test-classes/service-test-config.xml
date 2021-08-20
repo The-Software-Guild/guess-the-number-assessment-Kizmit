@@ -1,0 +1,2 @@
+<bean id="gameDao" class="com.jdm.guessthenumberrestapi.service.GuessTheNumberGameDaoStubImpl"/>
+<bean id="roundDao" class="com.jdm.guessthenumberrestapi.service.GuessTheNumberRoundDaoStubImpl"/>

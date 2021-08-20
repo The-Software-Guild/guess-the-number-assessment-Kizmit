@@ -1,6 +1,7 @@
 package com.jdm.guessthenumberrestapi.models;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 
 /**
@@ -60,5 +61,43 @@ public class Round {
     public void setGuess(String guess) {
         this.guess = guess;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + this.gameId;
+        hash = 97 * hash + this.roundId;
+        hash = 97 * hash + Objects.hashCode(this.result);
+        hash = 97 * hash + Objects.hashCode(this.guess);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Round other = (Round) obj;
+        if (this.gameId != other.gameId) {
+            return false;
+        }
+        if (this.roundId != other.roundId) {
+            return false;
+        }
+        if (!Objects.equals(this.result, other.result)) {
+            return false;
+        }
+        if (!Objects.equals(this.guess, other.guess)) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

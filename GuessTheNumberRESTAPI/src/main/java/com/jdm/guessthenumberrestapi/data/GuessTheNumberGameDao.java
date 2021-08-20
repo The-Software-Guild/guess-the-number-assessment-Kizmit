@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
  *
  * @author Joe
  */
+
 public interface GuessTheNumberGameDao {
     
     /**
@@ -27,5 +28,6 @@ public interface GuessTheNumberGameDao {
     public Game getGame(int gameId) throws EmptyResultDataAccessException;
 
     public void finishGame(int gameId); 
-     
+    
+    public void deleteGameById(int gameId);
 }
